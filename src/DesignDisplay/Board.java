@@ -1,9 +1,9 @@
-package src;
+package src.DesignDisplay;
 
 public class Board {
     private Pixel[][] pixels;
 
-    Board(int PANEL_WIDTH, int PANEL_HEIGHT){
+    public Board(int PANEL_WIDTH, int PANEL_HEIGHT){
         this.pixels = new Pixel[PANEL_HEIGHT][PANEL_WIDTH];
         for(int i = 0; i < PANEL_HEIGHT; i++){
             for(int j = 0; j < PANEL_WIDTH; j++){

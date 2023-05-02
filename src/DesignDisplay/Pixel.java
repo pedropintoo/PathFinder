@@ -1,4 +1,4 @@
-package src;
+package src.DesignDisplay;
 
 public class Pixel {
     public enum PixelType{

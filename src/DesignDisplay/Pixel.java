@@ -7,14 +7,13 @@ public class Pixel {
         AIR,
         WALL,
         NEAR,
-        ALTERNATIVE,
         FINAL,
         EXPLORED
     }
 
     public PixelType type;
 
-    Pixel(){
+    public Pixel(){
         type = PixelType.AIR;
     }
 

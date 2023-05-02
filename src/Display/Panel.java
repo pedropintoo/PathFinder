@@ -18,7 +18,7 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
     private final int PANEL_WIDTH;
     private final int PANEL_HEIGHT;
 
-    private final int PIXEL_SIZE = 20;
+    public static final int PIXEL_SIZE = 20;
 
     private Timer timer;
 

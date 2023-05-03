@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 public class Panel extends JPanel implements ActionListener, MouseListener, MouseMotionListener, KeyListener, FocusListener{
     // Declarations
@@ -38,7 +39,7 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
 
         this.board = board;
 
-        this.pathFinder = new PathFinder(board);
+        this.pathFinder = new PathFinder(board, this);
 
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 
@@ -74,7 +75,6 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
                     case START, FINAL -> g.setColor(Color.GREEN);
                     case END -> g.setColor(Color.RED);
                     case NEAR -> g.setColor(Color.GRAY);
-                    case ALTERNATIVE -> g.setColor(Color.PINK);
                     case EXPLORED -> g.setColor(Color.YELLOW);
                 }
 
@@ -87,7 +87,7 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO: A cada 1 ms vai fazer esta função
+        // TODO: A cada DELAY ms vai fazer esta função
 
 
 
@@ -191,8 +191,12 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_SPACE){
-            if(!pathFinder.start()){
-                System.out.println("ERROR IN PATH FINDER!! ");
+            try {
+                if(!pathFinder.start()){
+                    System.out.println("ERROR IN PATH FINDER!! ");
+                }
+            } catch (InterruptedException ex) {
+                System.out.println("ERROR");
             }
         }
     }

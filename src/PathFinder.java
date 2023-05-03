@@ -8,13 +8,15 @@ public class PathFinder {
     // Algorithms...
 
     private Board board;
+    private Panel panel;
 
     private final int PANEL_WIDTH;
     private final int PANEL_HEIGHT;
 
 
-    public PathFinder(Board board) {
+    public PathFinder(Board board, Panel panel) {
         this.board = board;
+        this.panel = panel;
 
         this.PANEL_HEIGHT = board.getPixels().length;
         this.PANEL_WIDTH = board.getPixels()[0].length;
@@ -22,7 +24,7 @@ public class PathFinder {
     }
 
 
-    public boolean start(){
+    public boolean start() throws InterruptedException {
         // In case that the start or the end does not exist
         if(getStartLocation()[0] == -1 || getEndLocation()[0] == -1){
             return false;
@@ -45,12 +47,27 @@ public class PathFinder {
 
         System.out.println(xStart + " " + yStart);
 
-        search(xStart, yStart);
+        // Starting thread
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    search(xStart, yStart);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
 
         return true;
     }
 
-    public boolean search(int xStart, int yStart){
+    public boolean search(int xStart, int yStart) throws InterruptedException {
+        this.panel.invalidate();
+
+        Thread.sleep(50);
+        System.out.println("Wait");
 
         boolean goBack = false;
 

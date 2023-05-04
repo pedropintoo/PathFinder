@@ -19,7 +19,10 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
     private final int PANEL_WIDTH;
     private final int PANEL_HEIGHT;
 
-    public static final int PIXEL_SIZE = 20;
+    private final int COLS;
+    private final int ROWS;
+
+    public final int PIXEL_SIZE;
 
     private Timer timer;
 
@@ -34,10 +37,16 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
     private boolean mouseClearDown = false;
 
     Panel(Board board){
-        this.PANEL_HEIGHT = board.getPixels().length;
-        this.PANEL_WIDTH = board.getPixels()[0].length;
+        this.PANEL_HEIGHT = board.getPANEL_HEIGHT();
+        this.PANEL_WIDTH = board.getPANEL_WIDTH();
+
+        this.ROWS = board.getROWS();
+        this.COLS = board.getCOLS();
+
 
         this.board = board;
+
+        this.PIXEL_SIZE = board.getPIXEL_SIZE();
 
         this.pathFinder = new PathFinder(board, this);
 
@@ -61,8 +70,8 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
         Graphics2D g2D = (Graphics2D) g;
 
         // Loop through the pixels in the board and draw each one as a square
-        for(int i = 0; i < PANEL_HEIGHT; i++){
-            for(int j = 0; j < PANEL_WIDTH; j++){
+        for(int i = 0; i < ROWS; i++){
+            for(int j = 0; j < COLS; j++){
 
                 // Calculate the coordinates of the top-left corner of the square to be drawn
                 int x = j * PIXEL_SIZE;
@@ -76,6 +85,7 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
                     case END -> g.setColor(Color.RED);
                     case NEAR -> g.setColor(Color.GRAY);
                     case EXPLORED -> g.setColor(Color.YELLOW);
+                    case HEAD -> g.setColor(Color.PINK);
                 }
 
                 // Draw the square
@@ -104,8 +114,8 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
 
             // Replace the start Pixel
             if(hasStart){
-                for(int i = 0; i < PANEL_HEIGHT; i++){
-                    for(int j = 0; j < PANEL_WIDTH; j++){
+                for(int i = 0; i < ROWS; i++){
+                    for(int j = 0; j < COLS; j++){
                         if(this.board.getPixels()[i][j].type == Pixel.PixelType.START) {
                             this.board.getPixels()[i][j].type = Pixel.PixelType.AIR;
                         }
@@ -118,8 +128,8 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
 
             // Replace the end Pixel
             if(hasEnd){
-                for(int i = 0; i < PANEL_HEIGHT; i++){
-                    for(int j = 0; j < PANEL_WIDTH; j++){
+                for(int i = 0; i < ROWS; i++){
+                    for(int j = 0; j < COLS; j++){
                         if(this.board.getPixels()[i][j].type == Pixel.PixelType.END){
                             this.board.getPixels()[i][j].type = Pixel.PixelType.AIR;
 
@@ -199,6 +209,16 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
                 System.out.println("ERROR");
             }
         }
+        if(e.getKeyCode() == KeyEvent.VK_C){
+            board.clearAll();
+        }
+        if(e.getKeyCode() == KeyEvent.VK_V){
+            board.clearPath();
+        }
+        if(e.getKeyCode() == KeyEvent.VK_M){
+            board.generateMaze();
+        }
+
     }
 
     @Override
@@ -214,6 +234,10 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
     @Override
     public void focusLost(FocusEvent e) {
 
+    }
+
+    public int getPIXEL_SIZE() {
+        return this.PIXEL_SIZE;
     }
 }
 

@@ -8,7 +8,9 @@ public class Pixel {
         WALL,
         NEAR,
         FINAL,
-        EXPLORED
+        EXPLORED,
+        HEAD,
+        VISIT // ONLY FOR generateMaze()
     }
 
     public PixelType type;

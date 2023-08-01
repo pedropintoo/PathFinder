@@ -1,22 +1,4 @@
-package src.DesignDisplay;
-
-public class MazeGenerator {
-
-    private final Board board;
-    private final int ROWS;
-    private final int COLS;
-    private int[][] maze;
-    private final Pixel[][] pixels;
-
-    public MazeGenerator(Board board) {
-        this.board = board;
-        this.ROWS = board.getROWS();
-        this.COLS = board.getCOLS();
-        this.maze = board.getMaze();
-        this.pixels = board.getPixels();
-    }
-
-    public void generateMaze() throws InterruptedException {
+public void generateMaze() throws InterruptedException {
         // TODO: O MAZE GENERATE TEM ERROS E ESTA CONFUSO, MAS FUNCIONA PARA TESTAR
 
         int count;
@@ -126,4 +108,3 @@ public class MazeGenerator {
             fill(row,col-1,replace,replaceWith);
         }
     }
-}

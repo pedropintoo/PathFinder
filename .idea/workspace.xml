@@ -6,8 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e8fac547-b7cc-4d77-8477-d2e38f549ff2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PathAlgoritms/PathFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PathAlgoritms/PathFinder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PathAlgoritms/RecursiveAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PathAlgoritms/RecursiveAlgorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/PathAlgoritms/PathFinder$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/PathAlgoritms/PathFinder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/PathAlgoritms/PathFinder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/PathAlgoritms/RecursiveAlgorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/PathAlgoritms/RecursiveAlgorithm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DesignDisplay/MazeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MazeAlgoritms/MazeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Display/Panel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Display/Panel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PathAlgoritms/RecursiveAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PathAlgoritms/Algoritms/RecursiveAlgorithm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +63,7 @@
       <module name="PathFinder" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="src.DesignDisplay.*" />
+          <option name="PATTERN" value="src.MazeAlgoritms.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -96,7 +101,7 @@
       <workItem from="1683292459479" duration="824000" />
       <workItem from="1683475242920" duration="66000" />
       <workItem from="1690810182842" duration="1155000" />
-      <workItem from="1690812751502" duration="14031000" />
+      <workItem from="1690812751502" duration="16320000" />
     </task>
     <servers />
   </component>

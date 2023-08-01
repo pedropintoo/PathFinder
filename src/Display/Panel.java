@@ -1,10 +1,11 @@
 package src.Display;
 
 import src.DesignDisplay.Board;
-import src.DesignDisplay.MazeGenerator;
+import src.MazeAlgoritms.Algoritms.RandomizedKruskalAlgorithm;
+import src.MazeAlgoritms.MazeGenerator;
 import src.DesignDisplay.Pixel;
 import src.PathAlgoritms.PathFinder;
-import src.PathAlgoritms.RecursiveAlgorithm;
+import src.PathAlgoritms.Algoritms.RecursiveAlgorithm;
 
 import java.awt.*;
 
@@ -235,7 +236,7 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
                 // TODO: O MAZE GENERATE TEM ERROS E ESTA CONFUSO, MAS FUNCIONA PARA TESTAR
 
                 // Generate Maze
-                MazeGenerator mazeGen = new MazeGenerator(board);
+                MazeGenerator mazeGen = new RandomizedKruskalAlgorithm(board);
                 try {
                     mazeGen.generateMaze();
                 } catch (InterruptedException ex) {

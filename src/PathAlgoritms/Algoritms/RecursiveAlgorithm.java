@@ -1,10 +1,11 @@
-package src.PathAlgoritms;
+package src.PathAlgoritms.Algoritms;
 
 import src.DesignDisplay.Board;
 import src.DesignDisplay.Pixel;
 import src.Display.Panel;
+import src.PathAlgoritms.PathFinder;
 
-public class RecursiveAlgorithm extends PathFinder{
+public class RecursiveAlgorithm extends PathFinder {
 
     private final Panel panel;
     private final int DELAY_ANIMATION;
@@ -20,7 +21,6 @@ public class RecursiveAlgorithm extends PathFinder{
         this.board = board;
         this.COLS = board.getCOLS();
         this.ROWS = board.getROWS();
-
 
     }
 

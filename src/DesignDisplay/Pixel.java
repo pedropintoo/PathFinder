@@ -17,5 +17,4 @@ public class Pixel {
         type = PixelType.AIR;
     }
 
-
 }

@@ -4,6 +4,7 @@ import src.DesignDisplay.Board;
 import src.DesignDisplay.MazeGenerator;
 import src.DesignDisplay.Pixel;
 import src.PathAlgoritms.PathFinder;
+import src.PathAlgoritms.RecursiveAlgorithm;
 
 import java.awt.*;
 
@@ -48,7 +49,7 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
 
         this.PIXEL_SIZE = board.getPIXEL_SIZE();
 
-        this.pathFinder = new PathFinder(board, this);
+        this.pathFinder = new RecursiveAlgorithm(board, this);
 
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 
@@ -81,7 +82,7 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
                 switch (this.board.getPixels()[i][j].type) {
                     case AIR -> g.setColor(Color.LIGHT_GRAY);
                     case WALL -> g.setColor(Color.BLUE);
-                    case START, FINAL -> g.setColor(Color.GREEN);
+                    case START -> g.setColor(Color.GREEN);
                     case END -> g.setColor(Color.RED);
                     case NEAR -> g.setColor(Color.GRAY);
                     case EXPLORED -> g.setColor(Color.YELLOW);
@@ -99,8 +100,6 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
     public void actionPerformed(ActionEvent e) {
         // TODO: A cada DELAY ms vai fazer esta função
 
-
-
         // Repaint para re scaling
         repaint();
     }
@@ -110,35 +109,39 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
         int row = e.getY() / PIXEL_SIZE;
         int col = e.getX() / PIXEL_SIZE;
 
-        if (e.getButton() == MouseEvent.BUTTON1) {
-
-            // Replace the start Pixel
-            if(hasStart){
-                for(int i = 0; i < ROWS; i++){
-                    for(int j = 0; j < COLS; j++){
-                        if(this.board.getPixels()[i][j].type == Pixel.PixelType.START) {
-                            this.board.getPixels()[i][j].type = Pixel.PixelType.AIR;
+        switch (e.getButton()){
+            case MouseEvent.BUTTON1 -> {
+                // clear current start pixel
+                if(hasStart){
+                    for(int i = 0; i < ROWS; i++){
+                        for(int j = 0; j < COLS; j++){
+                            if(this.board.getPixels()[i][j].type == Pixel.PixelType.START) {
+                                this.board.getPixels()[i][j].type = Pixel.PixelType.AIR;
+                            }
                         }
                     }
                 }
+                // gen new start pixel
+                hasStart = true;
+                board.getPixels()[row][col].type = Pixel.PixelType.START;
             }
-            hasStart = true;
-            board.getPixels()[row][col].type = Pixel.PixelType.START;
-        } else if (e.getButton() == MouseEvent.BUTTON3) {
 
-            // Replace the end Pixel
-            if(hasEnd){
-                for(int i = 0; i < ROWS; i++){
-                    for(int j = 0; j < COLS; j++){
-                        if(this.board.getPixels()[i][j].type == Pixel.PixelType.END){
-                            this.board.getPixels()[i][j].type = Pixel.PixelType.AIR;
+            case MouseEvent.BUTTON3 -> {
+                // clear current end pixel
+                if(hasEnd){
+                    for(int i = 0; i < ROWS; i++){
+                        for(int j = 0; j < COLS; j++){
+                            if(this.board.getPixels()[i][j].type == Pixel.PixelType.END){
+                                this.board.getPixels()[i][j].type = Pixel.PixelType.AIR;
 
+                            }
                         }
                     }
                 }
+                // gen new end pixel
+                hasEnd = true;
+                board.getPixels()[row][col].type = Pixel.PixelType.END;
             }
-            hasEnd = true;
-            board.getPixels()[row][col].type = Pixel.PixelType.END;
         }
 
         repaint();
@@ -146,21 +149,20 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1) {
-            mouseWallDown = true;
-        } else if (e.getButton() == MouseEvent.BUTTON3) {
-            mouseClearDown = true;
+        switch (e.getButton()){
+            case  MouseEvent.BUTTON1 -> mouseWallDown = true;
+
+            case  MouseEvent.BUTTON3 -> mouseClearDown = true;
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1) {
-            mouseWallDown = false;
-        } else if (e.getButton() == MouseEvent.BUTTON3) {
-            mouseClearDown = false;
-        }
+        switch (e.getButton()){
+            case  MouseEvent.BUTTON1 -> mouseWallDown = false;
 
+            case  MouseEvent.BUTTON3 -> mouseClearDown = false;
+        }
     }
 
     @Override
@@ -175,12 +177,14 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
     @Override
     public void mouseDragged(MouseEvent e) {
         if (mouseWallDown) {
+            // paint walls
             int row = e.getY() / PIXEL_SIZE;
             int col = e.getX() / PIXEL_SIZE;
             board.getPixels()[row][col].type = Pixel.PixelType.WALL;
             repaint();
         }
         else if (mouseClearDown) {
+            // clear pixels
             int row = e.getY() / PIXEL_SIZE;
             int col = e.getX() / PIXEL_SIZE;
             board.getPixels()[row][col].type = Pixel.PixelType.AIR;
@@ -200,27 +204,44 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_SPACE){
-            try {
-                if(!pathFinder.start()){
-                    System.out.println("ERROR IN PATH FINDER!! ");
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_SPACE -> {
+                try {
+                    if(!pathFinder.start()){
+                        System.out.println("ERROR IN PATH FINDER!! ");
+                    }
+                } catch (InterruptedException ex) {
+                    System.out.println("ERROR");
                 }
-            } catch (InterruptedException ex) {
-                System.out.println("ERROR");
             }
-        }
-        if(e.getKeyCode() == KeyEvent.VK_C){
-            board.clearAll();
-        }
-        if(e.getKeyCode() == KeyEvent.VK_V){
-            board.clearPath();
-        }
-        if(e.getKeyCode() == KeyEvent.VK_M){
-            // TODO: O MAZE GENERATE TEM ERROS E ESTA CONFUSO, MAS FUNCIONA PARA TESTAR
 
-            // Generate Maze
-            MazeGenerator mazeGen = new MazeGenerator(board);
-            mazeGen.generateMaze();
+            case KeyEvent.VK_C -> {
+                try {
+                    board.clearAll();
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+            case KeyEvent.VK_V -> {
+                try {
+                    board.clearPath();
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+            case KeyEvent.VK_M -> {
+                // TODO: O MAZE GENERATE TEM ERROS E ESTA CONFUSO, MAS FUNCIONA PARA TESTAR
+
+                // Generate Maze
+                MazeGenerator mazeGen = new MazeGenerator(board);
+                try {
+                    mazeGen.generateMaze();
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
         }
 
     }
@@ -238,10 +259,6 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
     @Override
     public void focusLost(FocusEvent e) {
 
-    }
-
-    public int getPIXEL_SIZE() {
-        return this.PIXEL_SIZE;
     }
 }
 

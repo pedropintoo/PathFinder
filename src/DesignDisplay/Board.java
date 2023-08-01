@@ -1,11 +1,10 @@
 package src.DesignDisplay;
 
 
-
+import src.PathAlgoritms.PathFinder;
 
 public class Board {
     private final Pixel[][] pixels;
-
     private int[][] maze;
 
     private final int PANEL_WIDTH;
@@ -15,11 +14,15 @@ public class Board {
     private final int COLS;
     private final int ROWS;
 
+    private PathFinder currentPathFinder;
+
+
     public Board(int PANEL_WIDTH, int PANEL_HEIGHT, int PIXEL_SIZE){
         this.PANEL_HEIGHT = PANEL_HEIGHT;
         this.PANEL_WIDTH = PANEL_WIDTH;
         this.PIXEL_SIZE = PIXEL_SIZE;
 
+        // Generate rows & cols & pixels
         this.ROWS = PANEL_HEIGHT/PIXEL_SIZE;
         this.COLS = PANEL_WIDTH/PIXEL_SIZE;
         this.pixels = new Pixel[ROWS][COLS];
@@ -58,7 +61,32 @@ public class Board {
         return maze;
     }
 
-    public void clearAll(){
+    public int[] getStartLocation(){
+        for(int i = 0; i < ROWS; i++){
+            for(int j = 0; j < COLS; j++){
+                if(pixels[i][j].type == Pixel.PixelType.START){
+                    return new int[] {i, j}; //  {y,x}
+                }
+            }
+        }
+        return null;
+    }
+
+    public int[] getEndLocation(){
+        for(int i = 0; i < ROWS; i++){
+            for(int j = 0; j < COLS; j++){
+                if(pixels[i][j].type == Pixel.PixelType.END){
+                    return new int[] {i, j}; //  {y,x}
+                }
+            }
+        }
+        return null;
+    }
+
+
+
+    public void clearAll() throws InterruptedException {
+        if(currentPathFinder != null) currentPathFinder.stop();
         for(int i = 0; i < ROWS; i++){
             for(int j = 0; j < COLS; j++){
                 this.pixels[i][j] = new Pixel();
@@ -66,10 +94,11 @@ public class Board {
         }
     }
 
-    public void clearPath(){
+    public void clearPath() throws InterruptedException {
+        if(currentPathFinder != null) currentPathFinder.stop();
         for(int i = 0; i < ROWS; i++){
             for(int j = 0; j < COLS; j++){
-                if(this.pixels[i][j].type == Pixel.PixelType.NEAR || this.pixels[i][j].type == Pixel.PixelType.EXPLORED || this.pixels[i][j].type == Pixel.PixelType.FINAL){
+                if(this.pixels[i][j].type == Pixel.PixelType.NEAR || this.pixels[i][j].type == Pixel.PixelType.EXPLORED || this.pixels[i][j].type == Pixel.PixelType.HEAD){
                     this.pixels[i][j].type = Pixel.PixelType.AIR;
                 }
             }
@@ -79,5 +108,7 @@ public class Board {
 
 
 
-
+    public void setCurrentPathFinder(PathFinder pathFinder) {
+        this.currentPathFinder = pathFinder;
+    }
 }

@@ -16,7 +16,7 @@ public class MazeGenerator {
         this.pixels = board.getPixels();
     }
 
-    public void generateMaze() {
+    public void generateMaze() throws InterruptedException {
         // TODO: O MAZE GENERATE TEM ERROS E ESTA CONFUSO, MAS FUNCIONA PARA TESTAR
 
         int count;

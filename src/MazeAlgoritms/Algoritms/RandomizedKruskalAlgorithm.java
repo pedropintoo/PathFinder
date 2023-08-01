@@ -4,10 +4,7 @@ import src.DesignDisplay.Board;
 import src.DesignDisplay.Pixel;
 import src.MazeAlgoritms.MazeGenerator;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class RandomizedKruskalAlgorithm extends MazeGenerator {
     private final Board board;
@@ -23,34 +20,48 @@ public class RandomizedKruskalAlgorithm extends MazeGenerator {
         // Clear all first
         board.clearAll();
 
-        ArrayList<HashSet<Pixel>> cellSet = new ArrayList<>();
-        ArrayList<Pixel> safeSet = new ArrayList<>();
+        HashMap<Integer, HashSet<Pixel>> cellMap = new HashMap<>(); // map of pixel -> set
+        ArrayList<Pixel> allPixels = new ArrayList<>(); // list of all pixels
         // All the pixels converted to Wall
         // Create a Set for each Cell
         List.of(pixels).forEach(row -> List.of(row).forEach(pixel -> {
-            safeSet.add(pixel);
+            allPixels.add(pixel);
             pixel.type = Pixel.PixelType.WALL;
-            cellSet.add(new HashSet<>(List.of(pixel)));
+            cellMap.put(allPixels.size()-1,new HashSet<>(List.of(pixel)));
         }));
 
-        int indexPixels = safeSet.size()-1;
+        int numSets = allPixels.size(); // number of sets
 
-        while(cellSet.size() != 1){
+        int indexPixels = allPixels.size()-1;
 
-            // Chose a random pixel
-            int randomPixel = (int) (Math.random() * indexPixels);
-            safeSet.get(randomPixel).type = Pixel.PixelType.AIR;
+        while(numSets > 1){
+
+
+            // Chose a random pixel in chess (spaced) layout
+            int randomPixel;
+            do{
+                randomPixel = (int) (Math.random() * indexPixels);
+                System.out.println(randomPixel + "    -  "+randomPixel/board.getCOLS());
+            }while(randomPixel % 2 != 0 ||  ((randomPixel/board.getCOLS())) % 2 != 0);
+
+            allPixels.get(randomPixel).type = Pixel.PixelType.AIR;
 
             // Chose a random direction checking conditions (pixels in border)
             int randomDirection = getRandomDirection(randomPixel);
 
+            int leanPixel = 0;
             switch(randomDirection) {
-                case 1 -> safeSet.get(randomPixel - board.getCOLS()).type = Pixel.PixelType.AIR; // up
-                case 2 -> safeSet.get(randomPixel + 1).type = Pixel.PixelType.AIR; // right
-                case 3 -> safeSet.get(randomPixel + board.getCOLS()).type = Pixel.PixelType.AIR; // down
-                case 4 -> safeSet.get(randomPixel - 1).type = Pixel.PixelType.AIR; // left
+                case 1 -> leanPixel = randomPixel - board.getCOLS(); // up
+                case 2 -> leanPixel = randomPixel + 1; // right
+                case 3 -> leanPixel = randomPixel + board.getCOLS(); // down
+                case 4 -> leanPixel = randomPixel - 1; // left
             }
-            break;
+            allPixels.get(leanPixel).type = Pixel.PixelType.AIR;
+
+            // Add the set of leanPixel to randomPixel's Set
+            cellMap.get(randomPixel).addAll(cellMap.get(leanPixel));
+            numSets--;
+
         }
 
     }
@@ -65,7 +76,7 @@ public class RandomizedKruskalAlgorithm extends MazeGenerator {
             // Can not go upper
             condition.add(1);
         }
-        if(randomPixel > board.getCOLS()*board.getROWS() - board.getROWS() - 1 ){
+        if(randomPixel > board.getCOLS()*board.getROWS() - board.getCOLS() - 1 ){
             // Can not go down
             condition.add(3);
         }
@@ -81,7 +92,7 @@ public class RandomizedKruskalAlgorithm extends MazeGenerator {
         do{
             randomDirection = (int) (Math.random() * 4) + 1;
         }while(condition.contains(randomDirection));
-        System.out.println(randomPixel);
+
         return randomDirection;
     }
 }

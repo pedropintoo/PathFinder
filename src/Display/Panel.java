@@ -1,15 +1,15 @@
 package src.Display;
 
 import src.DesignDisplay.Board;
+import src.DesignDisplay.MazeGenerator;
 import src.DesignDisplay.Pixel;
-import src.PathFinder;
+import src.PathAlgoritms.PathFinder;
 
 import java.awt.*;
 
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 public class Panel extends JPanel implements ActionListener, MouseListener, MouseMotionListener, KeyListener, FocusListener{
     // Declarations
@@ -216,7 +216,11 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
             board.clearPath();
         }
         if(e.getKeyCode() == KeyEvent.VK_M){
-            board.generateMaze();
+            // TODO: O MAZE GENERATE TEM ERROS E ESTA CONFUSO, MAS FUNCIONA PARA TESTAR
+
+            // Generate Maze
+            MazeGenerator mazeGen = new MazeGenerator(board);
+            mazeGen.generateMaze();
         }
 
     }

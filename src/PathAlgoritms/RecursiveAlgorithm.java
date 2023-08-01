@@ -6,7 +6,7 @@ import src.Display.Panel;
 
 public class RecursiveAlgorithm extends PathFinder{
 
-    private Panel panel;
+    private final Panel panel;
     private final int DELAY_ANIMATION;
     private final Board board;
     private final int COLS;
@@ -20,6 +20,7 @@ public class RecursiveAlgorithm extends PathFinder{
         this.board = board;
         this.COLS = board.getCOLS();
         this.ROWS = board.getROWS();
+
 
     }
 

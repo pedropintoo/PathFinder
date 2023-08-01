@@ -1,7 +1,6 @@
 package src.PathAlgoritms;
 
 import src.DesignDisplay.Board;
-import src.DesignDisplay.Pixel;
 import src.Display.Panel;
 
 public abstract class PathFinder {
@@ -12,13 +11,11 @@ public abstract class PathFinder {
     private final Board board;
     private final Panel panel;
 
-
     private final int DELAY_ANIMATION = 50;
 
     public PathFinder(Board board, Panel panel) {
         this.board = board;
         this.panel = panel;
-
 
     }
 
@@ -41,17 +38,14 @@ public abstract class PathFinder {
 
         // Starting thread
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
+        Thread thread = new Thread(() -> {
 
-                try {
-                    execute(xStart, yStart);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
+            try {
+                execute(xStart, yStart);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
+
         });
         thread.start();
 
@@ -80,4 +74,5 @@ public abstract class PathFinder {
     public int getDELAY_ANIMATION() {
         return DELAY_ANIMATION;
     }
+
 }

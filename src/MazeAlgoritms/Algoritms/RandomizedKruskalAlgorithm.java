@@ -45,19 +45,19 @@ public class RandomizedKruskalAlgorithm extends MazeGenerator {
             }
         }));
 
-        int numSets = cellMap.size(); // number of sets
-
         int indexPixels = allPixels.size()-1;
 
-        while(numSets > 1){
+        HashSet<Integer> tempPixels = new HashSet<>();
+
+        while(tempPixels.size() < cellMap.size()){
 
 
             // Chose a random pixel in chess (spaced) layout
             int randomPixel;
             do{
                 randomPixel = (int) (Math.random() * indexPixels);
-            }while(!isChessLayout(randomPixel));
-
+                System.out.println("a");
+            }while(tempPixels.contains(randomPixel) || !isChessLayout(randomPixel));
 
 
             // Chose a random direction checking conditions (pixels in border)
@@ -88,29 +88,34 @@ public class RandomizedKruskalAlgorithm extends MazeGenerator {
                 }
             }
 
-            allPixels.get(randomPixel).type = Pixel.PixelType.AIR;
-            allPixels.get(betweenPixel).type = Pixel.PixelType.AIR;
-            allPixels.get(leanPixel).type = Pixel.PixelType.AIR;
+
 
             // Unite the sets to the biggest set
             //System.out.println(randomPixel+" - "+betweenPixel+" - "+leanPixel);
             if(cellMap.get(randomPixel).contains(allPixels.get(leanPixel))) {
-//                System.out.println(numSets);
-//                System.out.println(cellMap.get(randomPixel));
-//                System.out.println(cellMap.get(leanPixel));
                 continue;
             }
+
+            allPixels.get(randomPixel).type = Pixel.PixelType.AIR;
+            allPixels.get(betweenPixel).type = Pixel.PixelType.AIR;
+            allPixels.get(leanPixel).type = Pixel.PixelType.AIR;
 
             HashSet<Pixel> temp = new HashSet<>();
 
             temp.addAll(cellMap.get(randomPixel));
             temp.addAll(cellMap.get(leanPixel));
-            cellMap.replace(randomPixel, temp);
-            cellMap.replace(leanPixel, temp);
 
+            cellMap.get(randomPixel).forEach(pixel -> cellMap.replace(pixel.getIndex(), temp));
+            cellMap.get(leanPixel).forEach(pixel -> cellMap.replace(pixel.getIndex(), temp));
 
+            if(tempPixels.size() < temp.size()){
+                tempPixels = new HashSet<>();
+                HashSet<Integer> finalTempPixels = tempPixels;
+                temp.forEach(t -> finalTempPixels.add(t.getIndex()));
+            }
 
-            numSets--;
+            System.out.println(tempPixels.size());
+
 
         }
 

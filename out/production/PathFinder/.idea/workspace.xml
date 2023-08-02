@@ -5,35 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8fac547-b7cc-4d77-8477-d2e38f549ff2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PathFinder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PathFinder.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/PathFinder.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/PathFinder.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/DesignDisplay/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/DesignDisplay/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/DesignDisplay/Pixel$PixelType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/DesignDisplay/Pixel$PixelType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/DesignDisplay/Pixel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/DesignDisplay/Pixel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/Display/Frame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/Display/Frame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/Display/Panel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/Display/Panel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/Display/Panel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/Display/Panel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/PathFinder$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/PathFinder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DesignDisplay/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DesignDisplay/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DesignDisplay/Pixel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DesignDisplay/Pixel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Display/Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Display/Frame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Display/Panel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Display/Panel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PathFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PathAlgoritms/PathFinder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +28,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2PEOib488j1JLD7qmjixytAbmHe" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -71,7 +48,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "vcs.Git",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -81,7 +58,7 @@
       <module name="PathFinder" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="src.DesignDisplay.*" />
+          <option name="PATTERN" value="src.MazeAlgoritms.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -119,10 +96,22 @@
       <workItem from="1683292459479" duration="824000" />
       <workItem from="1683475242920" duration="66000" />
       <workItem from="1690810182842" duration="1155000" />
+      <workItem from="1690812751502" duration="31383000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

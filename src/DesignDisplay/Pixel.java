@@ -1,45 +1,41 @@
 package src.DesignDisplay;
 
-import java.util.Objects;
-
 public class Pixel {
-    public enum PixelType{
-        START,
-        END,
-        AIR,
-        WALL,
-        NEAR,
-        EXPLORED,
-        HEAD
-    }
 
-    public PixelType type;
+    private PixelType type;
 
-    private int index;
+    private final int x;
+    private final int y;
 
-    public Pixel(){
-        type = PixelType.AIR;
+    public Pixel(int x, int y){
+        this.x = x;
+        this.y = y;
+
+        this.type = PixelType.AIR;
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pixel pixel = (Pixel) o;
-        return index == pixel.index && type == pixel.type;
+    // Getters
+
+    public PixelType getType() {
+        return type;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(type, index);
+    public int[] getCoords(){
+        return new int[] {x, y};
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public int getX() {
+        return x;
     }
 
-    public int getIndex() {
-        return index;
+    public int getY() {
+        return y;
+    }
+
+    // Setters
+
+    public void setType(PixelType type) {
+        this.type = type;
     }
 }

@@ -8,7 +8,7 @@ import java.util.*;
 
 public class RandomizedKruskalAlgorithm extends MazeGenerator {
     private final Board board;
-    private final Pixel[][] pixels;
+    private final HashSet<Pixel> pixels;
     public RandomizedKruskalAlgorithm(Board board) {
         super(board);
         this.board = board;
@@ -35,6 +35,7 @@ public class RandomizedKruskalAlgorithm extends MazeGenerator {
 
         // All the pixels converted to Wall
         // Create a Set for each Cell
+
         List.of(pixels).forEach(row -> List.of(row).forEach(pixel -> {
             pixel.type = Pixel.PixelType.WALL;
             int indexPixel = allPixels.size();
@@ -113,8 +114,6 @@ public class RandomizedKruskalAlgorithm extends MazeGenerator {
                 HashSet<Integer> finalTempPixels = tempPixels;
                 temp.forEach(t -> finalTempPixels.add(t.getIndex()));
             }
-
-            System.out.println(tempPixels.size());
 
 
         }

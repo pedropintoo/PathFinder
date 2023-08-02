@@ -1,6 +1,7 @@
 package src.Display;
 
 import src.DesignDisplay.Board;
+import src.DesignDisplay.PixelType;
 import src.MazeAlgoritms.Algoritms.RandomizedKruskalAlgorithm;
 import src.MazeAlgoritms.MazeGenerator;
 import src.DesignDisplay.Pixel;
@@ -10,6 +11,7 @@ import src.PathAlgoritms.Algoritms.RecursiveAlgorithm;
 import java.awt.*;
 
 import java.awt.event.*;
+import java.util.Arrays;
 
 import javax.swing.*;
 
@@ -26,14 +28,12 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
 
     public final int PIXEL_SIZE;
 
-    private Timer timer;
+    private final Timer timer;
 
-    private Board board;
+    private final Board board;
 
-    private PathFinder pathFinder;
+    private final PathFinder pathFinder;
 
-    private boolean hasStart = false;
-    private boolean hasEnd = false;
 
     private boolean mouseWallDown = false;
     private boolean mouseClearDown = false;
@@ -72,28 +72,23 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
         Graphics2D g2D = (Graphics2D) g;
 
         // Loop through the pixels in the board and draw each one as a square
-        for(int i = 0; i < ROWS; i++){
-            for(int j = 0; j < COLS; j++){
-
-                // Calculate the coordinates of the top-left corner of the square to be drawn
-                int x = j * PIXEL_SIZE;
-                int y = i * PIXEL_SIZE;
-
-                // Set the color of the square based on the type of the pixel
-                switch (this.board.getPixels()[i][j].type) {
-                    case AIR -> g.setColor(Color.LIGHT_GRAY);
-                    case WALL -> g.setColor(Color.BLUE);
-                    case START -> g.setColor(Color.GREEN);
-                    case END -> g.setColor(Color.RED);
-                    case NEAR -> g.setColor(Color.GRAY);
-                    case EXPLORED -> g.setColor(Color.YELLOW);
-                    case HEAD -> g.setColor(Color.PINK);
-                }
-
-                // Draw the square
-                g.fillRect(x, y, PIXEL_SIZE, PIXEL_SIZE);
-            }
-        }
+        this.board.getPixels()
+                .forEach(pixel -> {
+                    // Set the color of the square based on the type of the pixel
+                    switch (pixel.getType()){
+                        case AIR -> g.setColor(Color.LIGHT_GRAY);
+                        case WALL -> g.setColor(Color.BLUE);
+                        case START -> g.setColor(Color.GREEN);
+                        case END -> g.setColor(Color.RED);
+                        case NEAR -> g.setColor(Color.GRAY);
+                        case EXPLORED -> g.setColor(Color.YELLOW);
+                        case HEAD -> g.setColor(Color.PINK);
+                    }
+                    // Calculate the coordinates of the top-left corner of the square to be drawn
+                    // Draw the square
+                    g.fillRect(pixel.getX() * PIXEL_SIZE, pixel.getY() * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+                });
+        
 
     }
 
@@ -107,41 +102,29 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int row = e.getY() / PIXEL_SIZE;
-        int col = e.getX() / PIXEL_SIZE;
+        int x = e.getX() / PIXEL_SIZE;
+        int y = e.getY() / PIXEL_SIZE;
 
         switch (e.getButton()){
             case MouseEvent.BUTTON1 -> {
                 // clear current start pixel
-                if(hasStart){
-                    for(int i = 0; i < ROWS; i++){
-                        for(int j = 0; j < COLS; j++){
-                            if(this.board.getPixels()[i][j].type == Pixel.PixelType.START) {
-                                this.board.getPixels()[i][j].type = Pixel.PixelType.AIR;
-                            }
-                        }
-                    }
-                }
+                this.board.getPixels().stream()
+                        .filter(pixel -> pixel.getType() == PixelType.START)
+                        .findFirst().ifPresent(pixel -> pixel.setType(PixelType.AIR));
+
                 // gen new start pixel
-                hasStart = true;
-                board.getPixels()[row][col].type = Pixel.PixelType.START;
+                this.board.getPixel(x, y).setType(PixelType.START);
             }
 
             case MouseEvent.BUTTON3 -> {
                 // clear current end pixel
-                if(hasEnd){
-                    for(int i = 0; i < ROWS; i++){
-                        for(int j = 0; j < COLS; j++){
-                            if(this.board.getPixels()[i][j].type == Pixel.PixelType.END){
-                                this.board.getPixels()[i][j].type = Pixel.PixelType.AIR;
+                this.board.getPixels().stream()
+                        .filter(pixel -> pixel.getType() == PixelType.END)
+                        .findFirst().ifPresent(pixel -> pixel.setType(PixelType.AIR));
 
-                            }
-                        }
-                    }
-                }
                 // gen new end pixel
-                hasEnd = true;
-                board.getPixels()[row][col].type = Pixel.PixelType.END;
+                this.board.getPixel(x, y).setType(PixelType.END);
+
             }
         }
 
@@ -171,24 +154,25 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
 
     @Override
     public void mouseExited(MouseEvent e) {
+        // Optional
         mouseWallDown = false;
         mouseClearDown = false;
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
+
+        int x = e.getX() / PIXEL_SIZE;
+        int y = e.getY() / PIXEL_SIZE;
+
         if (mouseWallDown) {
             // paint walls
-            int row = e.getY() / PIXEL_SIZE;
-            int col = e.getX() / PIXEL_SIZE;
-            board.getPixels()[row][col].type = Pixel.PixelType.WALL;
+            this.board.getPixel(x, y).setType(PixelType.WALL);
             repaint();
         }
         else if (mouseClearDown) {
             // clear pixels
-            int row = e.getY() / PIXEL_SIZE;
-            int col = e.getX() / PIXEL_SIZE;
-            board.getPixels()[row][col].type = Pixel.PixelType.AIR;
+            this.board.getPixel(x, y).setType(PixelType.AIR);
             repaint();
         }
     }

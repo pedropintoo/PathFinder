@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class Frame extends JFrame{
 
-    private Panel panel;
+    private final Panel panel;
 
     public Frame(Board board){
 

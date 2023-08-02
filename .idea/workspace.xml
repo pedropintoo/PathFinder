@@ -7,7 +7,12 @@
     <list default="true" id="e8fac547-b7cc-4d77-8477-d2e38f549ff2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DesignDisplay/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DesignDisplay/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DesignDisplay/Pixel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DesignDisplay/Pixel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Display/Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Display/Frame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Display/Panel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Display/Panel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MazeAlgoritms/mazeComErros.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +28,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -96,7 +104,7 @@
       <workItem from="1683292459479" duration="824000" />
       <workItem from="1683475242920" duration="66000" />
       <workItem from="1690810182842" duration="1155000" />
-      <workItem from="1690812751502" duration="33934000" />
+      <workItem from="1690812751502" duration="41384000" />
     </task>
     <servers />
   </component>

@@ -3,9 +3,11 @@ package src.DesignDisplay;
 
 import src.PathAlgoritms.PathFinder;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 public class Board {
-    private final Pixel[][] pixels;
-    private int[][] maze;
+    private final HashSet<Pixel> pixels;
 
     private final int PANEL_WIDTH;
     private final int PANEL_HEIGHT;
@@ -22,18 +24,20 @@ public class Board {
         this.PANEL_WIDTH = PANEL_WIDTH;
         this.PIXEL_SIZE = PIXEL_SIZE;
 
-        // Generate rows & cols & pixels
+        // Generate rows & cols
         this.ROWS = PANEL_HEIGHT/PIXEL_SIZE;
         this.COLS = PANEL_WIDTH/PIXEL_SIZE;
-        this.pixels = new Pixel[ROWS][COLS];
-        for(int i = 0; i < ROWS; i++){
-            for(int j = 0; j < COLS; j++){
-                this.pixels[i][j] = new Pixel();
+
+        // Generate pixels
+        this.pixels = new HashSet<>();
+        for(int y = 0; y < ROWS; y++){
+            for(int x = 0; x < COLS; x++){
+                this.pixels.add(new Pixel(x, y));
             }
         }
     }
 
-    public Pixel[][] getPixels() {
+    public HashSet<Pixel> getPixels() {
         return this.pixels;
     }
 
@@ -57,56 +61,49 @@ public class Board {
         return this.ROWS;
     }
 
-    public int[][] getMaze() {
-        return maze;
-    }
 
     public int[] getStartLocation(){
-        for(int i = 0; i < ROWS; i++){
-            for(int j = 0; j < COLS; j++){
-                if(pixels[i][j].type == Pixel.PixelType.START){
-                    return new int[] {i, j}; //  {y,x}
-                }
-            }
-        }
-        return null;
+
+        Pixel tempPixel = pixels.stream()
+                .filter(pixel -> pixel.getType() == PixelType.START)
+                .findFirst()
+                .orElse(null);
+
+
+        return tempPixel == null ? null : tempPixel.getCoords();
     }
 
     public int[] getEndLocation(){
-        for(int i = 0; i < ROWS; i++){
-            for(int j = 0; j < COLS; j++){
-                if(pixels[i][j].type == Pixel.PixelType.END){
-                    return new int[] {i, j}; //  {y,x}
-                }
-            }
-        }
-        return null;
+        Pixel tempPixel = pixels.stream()
+                .filter(pixel -> pixel.getType() == PixelType.END)
+                .findFirst()
+                .orElse(null);
+
+
+        return tempPixel == null ? null : tempPixel.getCoords();
+    }
+
+    public Pixel getPixel(int x, int y){
+        return pixels.stream()
+                .filter(pixel -> Arrays.equals(pixel.getCoords(), new int[]{x, y}))
+                .findFirst().orElse(null);
     }
 
 
 
     public void clearAll() throws InterruptedException {
         if(currentPathFinder != null) currentPathFinder.stop();
-        for(int i = 0; i < ROWS; i++){
-            for(int j = 0; j < COLS; j++){
-                this.pixels[i][j] = new Pixel();
-            }
-        }
+        pixels.stream()
+                .filter(pixel -> pixel.getType() != PixelType.AIR)
+                .forEach(pixel -> pixel.setType(PixelType.AIR));
     }
 
     public void clearPath() throws InterruptedException {
         if(currentPathFinder != null) currentPathFinder.stop();
-        for(int i = 0; i < ROWS; i++){
-            for(int j = 0; j < COLS; j++){
-                if(this.pixels[i][j].type == Pixel.PixelType.NEAR || this.pixels[i][j].type == Pixel.PixelType.EXPLORED || this.pixels[i][j].type == Pixel.PixelType.HEAD){
-                    this.pixels[i][j].type = Pixel.PixelType.AIR;
-                }
-            }
-        }
+        pixels.stream()
+                .filter(pixel -> pixel.getType() == PixelType.NEAR || pixel.getType() == PixelType.EXPLORED || pixel.getType() == PixelType.HEAD)
+                .forEach(pixel -> pixel.setType(PixelType.AIR));
     }
-
-
-
 
     public void setCurrentPathFinder(PathFinder pathFinder) {
         this.currentPathFinder = pathFinder;

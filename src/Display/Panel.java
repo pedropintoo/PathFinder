@@ -18,39 +18,20 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
 
     private static final int DELAY = 1; // milliseconds
 
-    private final int PANEL_WIDTH;
-    private final int PANEL_HEIGHT;
-
-    private final int COLS;
-    private final int ROWS;
-
     public final int PIXEL_SIZE;
 
-    private final Timer timer;
-
     private final Board board;
-
-    private final PathFinder pathFinder;
-
 
     private boolean mouseWallDown = false;
     private boolean mouseClearDown = false;
 
     Panel(Board board){
-        this.PANEL_HEIGHT = board.getPANEL_HEIGHT();
-        this.PANEL_WIDTH = board.getPANEL_WIDTH();
-
-        this.ROWS = board.getROWS();
-        this.COLS = board.getCOLS();
-
 
         this.board = board;
 
         this.PIXEL_SIZE = board.getPIXEL_SIZE();
 
-        this.pathFinder = new RecursiveAlgorithm(board, this);
-
-        this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+        this.setPreferredSize(new Dimension(board.getPANEL_WIDTH(), board.getPANEL_HEIGHT()));
 
         addMouseListener(this);
         addMouseMotionListener(this);
@@ -58,7 +39,7 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
         addFocusListener(this);
 
 
-        timer = new Timer(Panel.DELAY,this);
+        Timer timer = new Timer(Panel.DELAY, this);
         timer.start();
 
 
@@ -74,17 +55,17 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
                 .forEach(pixel -> {
                     // Set the color of the square based on the type of the pixel
                     switch (pixel.getType()){
-                        case AIR -> g.setColor(Color.LIGHT_GRAY);
-                        case WALL -> g.setColor(Color.BLUE);
-                        case START -> g.setColor(Color.GREEN);
-                        case END -> g.setColor(Color.RED);
-                        case NEAR -> g.setColor(Color.GRAY);
-                        case EXPLORED -> g.setColor(Color.YELLOW);
-                        case HEAD -> g.setColor(Color.PINK);
+                        case AIR -> g2D.setColor(Color.LIGHT_GRAY);
+                        case WALL -> g2D.setColor(Color.BLUE);
+                        case START -> g2D.setColor(Color.GREEN);
+                        case END -> g2D.setColor(Color.RED);
+                        case NEAR -> g2D.setColor(Color.GRAY);
+                        case EXPLORED -> g2D.setColor(Color.YELLOW);
+                        case HEAD -> g2D.setColor(Color.PINK);
                     }
                     // Calculate the coordinates of the top-left corner of the square to be drawn
                     // Draw the square
-                    g.fillRect(pixel.getX() * PIXEL_SIZE, pixel.getY() * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+                    g2D.fillRect(pixel.getX() * PIXEL_SIZE, pixel.getY() * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
                 });
         
 
@@ -189,6 +170,7 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()){
             case KeyEvent.VK_SPACE -> {
+                PathFinder pathFinder = new RecursiveAlgorithm(board, this);
                 try {
                     if(!pathFinder.start()){
                         System.out.println("ERROR IN PATH FINDER!! ");
@@ -200,6 +182,8 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
 
             case KeyEvent.VK_C -> {
                 try {
+                    board.stopPathThread();
+                    board.stopMazeThread();
                     board.clearAll();
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
@@ -208,6 +192,7 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
 
             case KeyEvent.VK_V -> {
                 try {
+                    board.stopPathThread();
                     board.clearPath();
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);

@@ -113,8 +113,6 @@ public class RecursiveAlgorithm extends PathFinder {
                 // Painting HEAD
                 if(board.getPixel(nextXStart,nextYStart).getType() != PixelType.START){
                     board.getPixel(nextXStart, nextYStart).setType(PixelType.HEAD);
-                    //System.out.println(xStart+" "+yStart);
-                    //System.out.println("HEAD");
                 }
 
                 if(!search(nextXStart, nextYStart, true)){

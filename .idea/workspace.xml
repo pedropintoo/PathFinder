@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e8fac547-b7cc-4d77-8477-d2e38f549ff2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MazeAlgoritms/Algoritms/RandomizedKruskalAlgorithm.java" afterDir="false" />
     </list>
@@ -98,7 +96,7 @@
       <workItem from="1683292459479" duration="824000" />
       <workItem from="1683475242920" duration="66000" />
       <workItem from="1690810182842" duration="1155000" />
-      <workItem from="1690812751502" duration="32148000" />
+      <workItem from="1690812751502" duration="33934000" />
     </task>
     <servers />
   </component>

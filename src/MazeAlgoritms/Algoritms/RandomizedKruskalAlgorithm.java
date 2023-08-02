@@ -45,7 +45,7 @@ public class RandomizedKruskalAlgorithm extends MazeGenerator {
             }
         }));
 
-        int indexPixels = allPixels.size()-1;
+        int indexPixels = allPixels.size();
 
         HashSet<Integer> tempPixels = new HashSet<>();
 
@@ -56,7 +56,7 @@ public class RandomizedKruskalAlgorithm extends MazeGenerator {
             int randomPixel;
             do{
                 randomPixel = (int) (Math.random() * indexPixels);
-                System.out.println("a");
+
             }while(tempPixels.contains(randomPixel) || !isChessLayout(randomPixel));
 
 
@@ -108,7 +108,7 @@ public class RandomizedKruskalAlgorithm extends MazeGenerator {
             cellMap.get(randomPixel).forEach(pixel -> cellMap.replace(pixel.getIndex(), temp));
             cellMap.get(leanPixel).forEach(pixel -> cellMap.replace(pixel.getIndex(), temp));
 
-            if(tempPixels.size() < temp.size()){
+            if(tempPixels.size() <= temp.size()){
                 tempPixels = new HashSet<>();
                 HashSet<Integer> finalTempPixels = tempPixels;
                 temp.forEach(t -> finalTempPixels.add(t.getIndex()));

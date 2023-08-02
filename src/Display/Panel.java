@@ -2,16 +2,14 @@ package src.Display;
 
 import src.DesignDisplay.Board;
 import src.DesignDisplay.PixelType;
-import src.MazeAlgoritms.Algoritms.RandomizedKruskalAlgorithm;
-import src.MazeAlgoritms.MazeGenerator;
-import src.DesignDisplay.Pixel;
-import src.PathAlgoritms.PathFinder;
-import src.PathAlgoritms.Algoritms.RecursiveAlgorithm;
+import src.Algorithms.MazeAlgorithms.RandomizedKruskalAlgorithm;
+import src.Algorithms.MazeGenerator;
+import src.Algorithms.PathFinder;
+import src.Algorithms.PathAlgorithms.RecursiveAlgorithm;
 
 import java.awt.*;
 
 import java.awt.event.*;
-import java.util.Arrays;
 
 import javax.swing.*;
 

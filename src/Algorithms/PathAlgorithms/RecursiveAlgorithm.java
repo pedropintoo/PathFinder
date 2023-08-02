@@ -1,10 +1,10 @@
-package src.PathAlgoritms.Algoritms;
+package src.Algorithms.PathAlgorithms;
 
 import src.DesignDisplay.Board;
 import src.DesignDisplay.Pixel;
 import src.DesignDisplay.PixelType;
 import src.Display.Panel;
-import src.PathAlgoritms.PathFinder;
+import src.Algorithms.PathFinder;
 
 public class RecursiveAlgorithm extends PathFinder {
 
@@ -26,7 +26,11 @@ public class RecursiveAlgorithm extends PathFinder {
     }
 
     @Override
-    public void execute(int xStart, int yStart) throws InterruptedException {
+    public void execute() throws InterruptedException {
+        int[] startLocation = board.getStartLocation();
+        int xStart = startLocation[0];
+        int yStart = startLocation[1];
+
         search(xStart, yStart, true);
     }
 

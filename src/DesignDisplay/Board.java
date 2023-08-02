@@ -1,8 +1,8 @@
 package src.DesignDisplay;
 
 
-import src.MazeAlgoritms.MazeGenerator;
-import src.PathAlgoritms.PathFinder;
+import src.Algorithms.MazeGenerator;
+import src.Algorithms.PathFinder;
 
 import java.util.Arrays;
 import java.util.HashSet;

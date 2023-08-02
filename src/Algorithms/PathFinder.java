@@ -1,9 +1,9 @@
-package src.PathAlgoritms;
+package src.Algorithms;
 
 import src.DesignDisplay.Board;
 import src.Display.Panel;
 
-public abstract class PathFinder {
+public abstract class PathFinder implements Algorithms{
     // Algorithms...
 
     private boolean shutdown = false;
@@ -11,7 +11,7 @@ public abstract class PathFinder {
     private final Board board;
     private final Panel panel;
 
-    private final int DELAY_ANIMATION = 50;
+    private final int DELAY_ANIMATION = 30;
     private final int DELAY_SAFE_STOP = 50;
 
     public PathFinder(Board board, Panel panel) {
@@ -34,18 +34,13 @@ public abstract class PathFinder {
 
         board.setCurrentPathFinder(this);
 
-        int[] startLocation = board.getStartLocation();
-        int xStart = startLocation[0];
-        int yStart = startLocation[1];
-
-
 
         // Starting thread
 
         Thread thread = new Thread(() -> {
 
             try {
-                execute(xStart, yStart);
+                execute();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -64,7 +59,7 @@ public abstract class PathFinder {
         shutdown = false;
     }
 
-    public abstract void execute(int xStart, int yStart) throws InterruptedException;
+    public abstract void execute() throws InterruptedException;
 
 
     public boolean isShutdown() {

@@ -1,11 +1,10 @@
-package src.MazeAlgoritms.Algoritms;
+package src.Algorithms.MazeAlgorithms;
 
 import src.DesignDisplay.Board;
 import src.DesignDisplay.Pixel;
 import src.DesignDisplay.PixelType;
-import src.MazeAlgoritms.MazeGenerator;
+import src.Algorithms.MazeGenerator;
 
-import javax.swing.*;
 import java.util.*;
 
 public class RandomizedKruskalAlgorithm extends MazeGenerator {

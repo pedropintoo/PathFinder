@@ -1,9 +1,8 @@
-package src.MazeAlgoritms;
+package src.Algorithms;
 
 import src.DesignDisplay.Board;
-import src.DesignDisplay.Pixel;
 
-public abstract class MazeGenerator {
+public abstract class MazeGenerator implements Algorithms{
 
     private final Board board;
 
@@ -16,7 +15,7 @@ public abstract class MazeGenerator {
         this.board = board;
     }
 
-    public void start() throws InterruptedException {
+    public boolean start() throws InterruptedException {
 
 
         // Clear all first and stop the thread
@@ -38,6 +37,8 @@ public abstract class MazeGenerator {
 
         });
         thread.start();
+
+        return true;
     }
 
     public void stop() throws InterruptedException {
@@ -45,6 +46,7 @@ public abstract class MazeGenerator {
         Thread.sleep(DELAY_SAFE_STOP);
         shutdown = false;
     }
+
     public abstract void execute() throws InterruptedException;
 
 

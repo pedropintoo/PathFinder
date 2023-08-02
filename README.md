@@ -1,4 +1,4 @@
 # PathFinder
 Self-taught pathfinding project using various algorithms. Code implemented in Java.
 
-https://github.com/GH-Pedro/PathFinder/assets/120741472/cc876197-ffec-418c-af14-98747bd473a6
+[PathFinder.webm](https://github.com/GH-Pedro/PathFinder/assets/120741472/f6814e59-60f8-4573-afba-8410c590eac2)

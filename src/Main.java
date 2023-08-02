@@ -8,7 +8,7 @@ public class Main {
 
 
 
-        Board board = new Board(1200, 800, 20);
+        Board board = new Board(1220, 820, 20);
 
         // Start the game
         Frame frame = new Frame(board);

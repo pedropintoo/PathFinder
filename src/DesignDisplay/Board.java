@@ -1,6 +1,7 @@
 package src.DesignDisplay;
 
 
+import src.MazeAlgoritms.MazeGenerator;
 import src.PathAlgoritms.PathFinder;
 
 import java.util.Arrays;
@@ -17,6 +18,7 @@ public class Board {
     private final int ROWS;
 
     private PathFinder currentPathFinder;
+    private MazeGenerator currentMazeGenerator;
 
 
     public Board(int PANEL_WIDTH, int PANEL_HEIGHT, int PIXEL_SIZE){
@@ -92,20 +94,30 @@ public class Board {
 
 
     public void clearAll() throws InterruptedException {
-        if(currentPathFinder != null) currentPathFinder.stop();
         pixels.stream()
                 .filter(pixel -> pixel.getType() != PixelType.AIR)
                 .forEach(pixel -> pixel.setType(PixelType.AIR));
     }
 
     public void clearPath() throws InterruptedException {
-        if(currentPathFinder != null) currentPathFinder.stop();
         pixels.stream()
                 .filter(pixel -> pixel.getType() == PixelType.NEAR || pixel.getType() == PixelType.EXPLORED || pixel.getType() == PixelType.HEAD)
                 .forEach(pixel -> pixel.setType(PixelType.AIR));
     }
 
+    public void stopPathThread() throws InterruptedException {
+        if(currentPathFinder != null) currentPathFinder.stop();
+    }
+
+    public void stopMazeThread() throws  InterruptedException{
+        if(currentMazeGenerator != null) currentMazeGenerator.stop();
+    }
+
     public void setCurrentPathFinder(PathFinder pathFinder) {
         this.currentPathFinder = pathFinder;
+    }
+
+    public void setCurrentMazeGenerator(MazeGenerator currentMazeGenerator) {
+        this.currentMazeGenerator = currentMazeGenerator;
     }
 }

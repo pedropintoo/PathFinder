@@ -222,7 +222,7 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
                 // Generate Maze
                 MazeGenerator mazeGen = new RandomizedKruskalAlgorithm(board);
                 try {
-                    mazeGen.generateMaze();
+                    mazeGen.start();
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }

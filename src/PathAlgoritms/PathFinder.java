@@ -12,6 +12,7 @@ public abstract class PathFinder {
     private final Panel panel;
 
     private final int DELAY_ANIMATION = 50;
+    private final int DELAY_SAFE_STOP = 50;
 
     public PathFinder(Board board, Panel panel) {
         this.board = board;
@@ -26,14 +27,17 @@ public abstract class PathFinder {
             return false;
         }
 
-        board.setCurrentPathFinder(this);
-
         // Clear the search of map and stop the thread
+        board.stopPathThread();
+        board.stopMazeThread();
         board.clearPath();
 
+        board.setCurrentPathFinder(this);
+
         int[] startLocation = board.getStartLocation();
-        int yStart = startLocation[0];
-        int xStart = startLocation[1];
+        int xStart = startLocation[0];
+        int yStart = startLocation[1];
+
 
 
         // Starting thread
@@ -56,7 +60,7 @@ public abstract class PathFinder {
 
     public void stop() throws InterruptedException {
         shutdown = true;
-        Thread.sleep(DELAY_ANIMATION);
+        Thread.sleep(DELAY_SAFE_STOP);
         shutdown = false;
     }
 

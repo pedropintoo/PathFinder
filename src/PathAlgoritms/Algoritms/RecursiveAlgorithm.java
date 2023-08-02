@@ -2,6 +2,7 @@ package src.PathAlgoritms.Algoritms;
 
 import src.DesignDisplay.Board;
 import src.DesignDisplay.Pixel;
+import src.DesignDisplay.PixelType;
 import src.Display.Panel;
 import src.PathAlgoritms.PathFinder;
 
@@ -45,36 +46,36 @@ public class RecursiveAlgorithm extends PathFinder {
 
         boolean goBack = false;
 
-        Pixel wallFake = new Pixel();
-        wallFake.type = Pixel.PixelType.WALL;
+        Pixel wallFake = new Pixel(-1,-1);
+        wallFake.setType(PixelType.WALL);
 
         // Normal rounding 4 pixels, if the pixel is in the edge of panel is a fakeWall
         Pixel[] pixels =
                 {xStart < 0 || xStart >= COLS ||
                         yStart - 1 < 0 || yStart - 1 >= ROWS ?
-                        wallFake : board.getPixels()[yStart - 1][xStart], // 0
+                        wallFake : board.getPixel(xStart,yStart-1), // 0
                         xStart + 1 < 0 || xStart + 1 >= COLS ||
                                 yStart < 0 || yStart >= ROWS ?
-                                wallFake : board.getPixels()[yStart][xStart + 1], // 1
+                                wallFake : board.getPixel(xStart+1, yStart), // 1
                         xStart < 0 || xStart >= COLS ||
                                 yStart + 1 < 0 || yStart + 1 >= ROWS ?
-                                wallFake : board.getPixels()[yStart + 1][xStart], // 2
+                                wallFake : board.getPixel(xStart, yStart+1), // 2
                         xStart - 1 < 0 || xStart - 1 >= COLS ||
                                 yStart < 0 || yStart >= ROWS ?
-                                wallFake : board.getPixels()[yStart][xStart - 1] // 3
+                                wallFake : board.getPixel(xStart-1, yStart) // 3
                 };
 
 
 
         // Checking WIN
         for(int i = 0; i < 4; i++){
-            if(pixels[i].type == Pixel.PixelType.END){
-                if(board.getPixels()[yStart][xStart].type != Pixel.PixelType.START)
-                    board.getPixels()[yStart][xStart].type = Pixel.PixelType.EXPLORED;
+            if(pixels[i].getType() == PixelType.END){
+                if(board.getPixel(xStart,yStart).getType() != PixelType.START)
+                    board.getPixel(xStart,yStart).setType(PixelType.EXPLORED);
                 // Paint NEAR
                 for(int j = 0; j < 4; j++){
-                    if(i!=j && pixels[j].type == Pixel.PixelType.AIR){
-                        pixels[j].type = Pixel.PixelType.NEAR;
+                    if(i!=j && pixels[j].getType() == PixelType.AIR){
+                        pixels[j].setType(PixelType.NEAR);
                     }
                 }
 
@@ -85,15 +86,15 @@ public class RecursiveAlgorithm extends PathFinder {
 
         // GO TO NEXT AIR
         for(int i = 0; i < 4; i++){
-            if(pixels[i].type == Pixel.PixelType.AIR || (pixels[i].type == Pixel.PixelType.NEAR && !animate)){
-                if(board.getPixels()[yStart][xStart].type != Pixel.PixelType.START)
-                    board.getPixels()[yStart][xStart].type = Pixel.PixelType.EXPLORED;
+            if(pixels[i].getType() == PixelType.AIR || (pixels[i].getType() == PixelType.NEAR && !animate)){
+                if(board.getPixel(xStart,yStart).getType() != PixelType.START)
+                    board.getPixel(xStart,yStart).setType(PixelType.EXPLORED);
 
                 if(animate){
                     // Paint NEAR
                     for(int j = 0; j < 4; j++){
-                        if(i!=j && pixels[j].type == Pixel.PixelType.AIR){
-                            pixels[j].type = Pixel.PixelType.NEAR;
+                        if(i!=j && pixels[j].getType() == PixelType.AIR){
+                            pixels[j].setType(PixelType.NEAR);
                         }
                     }
                 }
@@ -106,14 +107,14 @@ public class RecursiveAlgorithm extends PathFinder {
 
 
                 // Painting HEAD
-                if(board.getPixels()[nextYStart][nextXStart].type != Pixel.PixelType.START){
-                    board.getPixels()[nextYStart][nextXStart].type = Pixel.PixelType.HEAD;
+                if(board.getPixel(nextXStart,nextYStart).getType() != PixelType.START){
+                    board.getPixel(nextXStart, nextYStart).setType(PixelType.HEAD);
                     //System.out.println(xStart+" "+yStart);
                     //System.out.println("HEAD");
                 }
 
                 if(!search(nextXStart, nextYStart, true)){
-                    board.getPixels()[nextYStart][nextXStart].type = Pixel.PixelType.EXPLORED;
+                    board.getPixel(nextXStart, nextYStart).setType(PixelType.EXPLORED);
                     goBack = true;
                 }
                 else
@@ -125,9 +126,9 @@ public class RecursiveAlgorithm extends PathFinder {
         if(goBack){
             // Go Back
             for(int i = 0; i < 4; i++){
-                if(pixels[i].type == Pixel.PixelType.NEAR){
-                    if(board.getPixels()[yStart][xStart].type != Pixel.PixelType.START)
-                        board.getPixels()[yStart][xStart].type = Pixel.PixelType.EXPLORED;
+                if(pixels[i].getType() == PixelType.NEAR){
+                    if(board.getPixel(xStart,yStart).getType() != PixelType.START)
+                        board.getPixel(xStart,yStart).setType(PixelType.EXPLORED);
 
 
                     int nextXStart = i == 1? xStart + 1: i == 3? xStart - 1: xStart;

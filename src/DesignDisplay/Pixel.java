@@ -1,6 +1,9 @@
 package src.DesignDisplay;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Pixel {
 
@@ -27,6 +30,15 @@ public class Pixel {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
+    }
+
+    @Override
+    public String toString() {
+        return "Pixel{" +
+                "type=" + type +
+                ", x=" + x +
+                ", y=" + y +
+                '}';
     }
 
     // Getters

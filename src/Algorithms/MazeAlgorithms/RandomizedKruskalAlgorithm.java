@@ -26,7 +26,7 @@ public class RandomizedKruskalAlgorithm extends MazeGenerator {
     }
 
     @Override
-    public void execute() throws InterruptedException {
+    public boolean execute() throws InterruptedException {
 
         HashMap<Pixel, HashSet<Pixel>> cellMap = new HashMap<>(); // map of pixel -> set
 
@@ -45,7 +45,7 @@ public class RandomizedKruskalAlgorithm extends MazeGenerator {
         boolean first = true;
 
         while(visitedPixels.size() < cellMap.size()){
-            if(super.isShutdown()) return; // end the generation
+            if(super.isShutdown()) return first;
 
             Thread.sleep(DELAY_ANIMATION);
 
@@ -115,6 +115,7 @@ public class RandomizedKruskalAlgorithm extends MazeGenerator {
             }
 
         }
+        return first;
     }
 
 

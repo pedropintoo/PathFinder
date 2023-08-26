@@ -30,110 +30,88 @@ public class RecursiveAlgorithm extends PathFinder {
     }
 
     @Override
-    public void execute() throws InterruptedException {
+    public boolean execute() throws InterruptedException {
         int[] startLocation = board.getStartLocation();
-        int xStart = startLocation[0];
-        int yStart = startLocation[1];
 
-        search(board.getPixel(xStart, yStart));
+        return search(board.getPixel(startLocation[0], startLocation[1]));
+
     }
 
     public boolean search(Pixel pixel) throws InterruptedException {
         if(super.isShutdown()) return true; // end the search
-        
+
         Thread.sleep(DELAY_ANIMATION);
-        
-        // Alterar a randomDirection para considerar os pixeis em volta
-        Pixel nextPixel = getRandomDirection(pixel);
 
-        if(stackNearPixels.size() > 0){
-            if(nextPixel == null){
-                return search(stackNearPixels.lastElement());
-            }else{
-                return search(nextPixel);
-            }
-        }else {
-            return false;
-        }
-    }
+        board.convertHeadToExplored();
 
-    private Pixel getRandomDirection(Pixel pixel) {
-        // 1 -> up // 2 -> right // 3 -> down // 4 -> left
-        // Verify 4 conditions of border pixels
-        int randomDirection;
-        int[] directions = new int[] {1,2,3,4};
-        Set<Integer> condition = new HashSet<>();
-        
-        if(pixel.getY() == 0){
-            // Can not go upper
-            condition.add(1);
-        }
-        if(pixel.getY() == ROWS-1){
-            // Can not go down
-            condition.add(3);
-        }
-        if(pixel.getX() == 0){
-            // Can not go left
-            condition.add(4);
-        }
-        if(pixel.getX() == COLS-1){
-            // Can not go right
-            condition.add(2);
-        }
 
         ArrayList<Pixel> leanPixels = new ArrayList<>();
-        
         Pixel lean;
-        for(int d : directions){
-            if(condition.contains(d)) continue; // can not go this direction
-            switch (d){
-                case 1 -> {
-                    lean = board.getPixel(pixel.getX(), pixel.getY()-1);
-                    if(lean.getType() == PixelType.AIR) {
-                        leanPixels.add(lean); // up
-                    }
-                }
-                case 2 -> {
-                    lean = board.getPixel(pixel.getX()+1, pixel.getY());
-                    if(lean.getType() == PixelType.AIR) {
-                        leanPixels.add(lean); // right
-                    }
-                }
-                case 3 -> {
-                    lean = board.getPixel(pixel.getX(), pixel.getY()+1); // down
-                    if(lean.getType() == PixelType.AIR) {
-                        leanPixels.add(lean); // down
-                    }
-                }
-                case 4 -> {
-                    lean = board.getPixel(pixel.getX()-1, pixel.getY()); // left
-                    if(lean.getType() == PixelType.AIR) {
-                        leanPixels.add(lean); // left
-                    }
-                }
+
+        lean = board.getPixel(pixel.getX(), pixel.getY()-1); // up
+        if(lean != null){
+            switch (lean.getType()){
+                case AIR,END -> leanPixels.add(lean);
             }
         }
 
-        if(leanPixels.size() == 0) return null;
+        lean = board.getPixel(pixel.getX()+1, pixel.getY()); // right
+        if(lean != null){
+            switch (lean.getType()){
+                case AIR,END -> leanPixels.add(lean);
+            }
+        }
 
-        lean = leanPixels.get(0); // Next pixel to explore - First
-        //lean = leanPixels.get((int) (Math.random() * leanPixels.size())); // Next pixel to explore - Random selection
+        lean = board.getPixel(pixel.getX(), pixel.getY()+1); // down
+        if(lean != null){
+            switch (lean.getType()){
+                case AIR,END -> leanPixels.add(lean);
+            }
+        }
+
+        lean = board.getPixel(pixel.getX()-1, pixel.getY()); // left
+        if(lean != null){
+            switch (lean.getType()){
+                case AIR,END -> leanPixels.add(lean);
+            }
+        }
+
+        if(leanPixels.size() == 0){
+            if(stackNearPixels.size() == 0) return false;
+            Pixel nextPixel = stackNearPixels.pop();
+            nextPixel.setType(PixelType.HEAD);
+
+            return search(nextPixel);
+        }
+
+        if(leanPixels.stream()
+                .filter(pix -> pix.getType().equals(PixelType.END))
+                .findFirst()
+                .orElse(null) != null){
+            // Finish the path
+
+            return true;
+        }
+
+
+        //lean = leanPixels.get(0); // Next pixel to explore - First
+        lean = leanPixels.get((int) (Math.random() * leanPixels.size())); // Next pixel to explore - Random selection
+
         leanPixels.remove(lean);
 
         leanPixels.forEach(pix -> {
             pix.setType(PixelType.NEAR);
-            stackNearPixels.add(pix);
+            stackNearPixels.push(pix);
         });
 
-        lean.setType(PixelType.EXPLORED);
+        lean.setType(PixelType.HEAD);
 
-        return lean;
+        return search(lean);
+
     }
-    
 
 
 
-//
 //    // TODO: RECURSIVE ALGORITHM TO FINDING PATH MADE BY ME
 //    public boolean search(int xStart, int yStart, boolean animate) throws InterruptedException {
 //        if(super.isShutdown()) return true; // end the search
@@ -178,7 +156,7 @@ public class RecursiveAlgorithm extends PathFinder {
 //                // Paint lean
 //                for(int j = 0; j < 4; j++){
 //                    if(i!=j && pixels[j].getType() == PixelType.AIR){
-//                        pixels[j].setType(PixelType.lean);
+//                        pixels[j].setType(PixelType.NEAR);
 //                    }
 //                }
 //
@@ -189,7 +167,7 @@ public class RecursiveAlgorithm extends PathFinder {
 //
 //        // GO TO NEXT AIR
 //        for(int i = 0; i < 4; i++){
-//            if(pixels[i].getType() == PixelType.AIR || (pixels[i].getType() == PixelType.lean && !animate)){
+//            if(pixels[i].getType() == PixelType.AIR || (pixels[i].getType() == PixelType.NEAR && !animate)){
 //                if(board.getPixel(xStart,yStart).getType() != PixelType.START)
 //                    board.getPixel(xStart,yStart).setType(PixelType.EXPLORED);
 //
@@ -197,7 +175,7 @@ public class RecursiveAlgorithm extends PathFinder {
 //                    // Paint lean
 //                    for(int j = 0; j < 4; j++){
 //                        if(i!=j && pixels[j].getType() == PixelType.AIR){
-//                            pixels[j].setType(PixelType.lean);
+//                            pixels[j].setType(PixelType.NEAR);
 //                        }
 //                    }
 //                }
@@ -227,7 +205,7 @@ public class RecursiveAlgorithm extends PathFinder {
 //        if(goBack){
 //            // Go Back
 //            for(int i = 0; i < 4; i++){
-//                if(pixels[i].getType() == PixelType.lean){
+//                if(pixels[i].getType() == PixelType.NEAR){
 //                    if(board.getPixel(xStart,yStart).getType() != PixelType.START)
 //                        board.getPixel(xStart,yStart).setType(PixelType.EXPLORED);
 //

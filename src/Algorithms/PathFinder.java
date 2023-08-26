@@ -40,7 +40,12 @@ public abstract class PathFinder implements Algorithms{
         Thread thread = new Thread(() -> {
 
             try {
-                execute();
+
+                if(execute()){
+                    System.out.println("Maze was completed!");
+                }else{
+                    System.out.println("Maze is impossible!");
+                }
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -59,7 +64,7 @@ public abstract class PathFinder implements Algorithms{
         shutdown = false;
     }
 
-    public abstract void execute() throws InterruptedException;
+    public abstract boolean execute() throws InterruptedException;
 
 
     public boolean isShutdown() {

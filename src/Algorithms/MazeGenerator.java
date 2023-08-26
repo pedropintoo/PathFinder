@@ -47,7 +47,7 @@ public abstract class MazeGenerator implements Algorithms{
         shutdown = false;
     }
 
-    public abstract void execute() throws InterruptedException;
+    public abstract boolean execute() throws InterruptedException;
 
 
     public boolean isShutdown() {

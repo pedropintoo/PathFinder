@@ -86,9 +86,16 @@ public class Board {
     }
 
     public Pixel getPixel(int x, int y){
+        // TODO: Poderei ter de criar um int[][] para tornar mais eficiente!!!
         return pixels.stream()
                 .filter(pixel -> Arrays.equals(pixel.getCoords(), new int[]{x, y}))
                 .findFirst().orElse(null);
+    }
+
+    public void convertHeadToExplored(){
+
+        pixels.stream()
+                .filter(pixel -> pixel.getType() == PixelType.HEAD).findFirst().ifPresent(pixelToConvert -> pixelToConvert.setType(PixelType.EXPLORED));
     }
 
 

@@ -42,38 +42,37 @@ public class RecursiveAlgorithm extends PathFinder {
 
         Thread.sleep(DELAY_ANIMATION);
 
-        board.convertHeadToExplored();
-
+        if(pixel.getType() == PixelType.HEAD) pixel.setType(PixelType.EXPLORED);
 
         ArrayList<Pixel> leanPixels = new ArrayList<>();
         Pixel lean;
 
         lean = board.getPixel(pixel.getX(), pixel.getY()-1); // up
         if(lean != null){
-            switch (lean.getType()){
-                case AIR,END -> leanPixels.add(lean);
-            }
+            if(lean.getType() == PixelType.AIR) leanPixels.add(lean);
+
+            if(lean.getType() == PixelType.END) return true; // Finish the path
         }
 
         lean = board.getPixel(pixel.getX()+1, pixel.getY()); // right
         if(lean != null){
-            switch (lean.getType()){
-                case AIR,END -> leanPixels.add(lean);
-            }
+            if(lean.getType() == PixelType.AIR) leanPixels.add(lean);
+
+            if(lean.getType() == PixelType.END) return true; // Finish the path
         }
 
         lean = board.getPixel(pixel.getX(), pixel.getY()+1); // down
         if(lean != null){
-            switch (lean.getType()){
-                case AIR,END -> leanPixels.add(lean);
-            }
+            if(lean.getType() == PixelType.AIR) leanPixels.add(lean);
+
+            if(lean.getType() == PixelType.END) return true; // Finish the path
         }
 
         lean = board.getPixel(pixel.getX()-1, pixel.getY()); // left
         if(lean != null){
-            switch (lean.getType()){
-                case AIR,END -> leanPixels.add(lean);
-            }
+            if(lean.getType() == PixelType.AIR) leanPixels.add(lean);
+
+            if(lean.getType() == PixelType.END) return true; // Finish the path
         }
 
         if(leanPixels.size() == 0){
@@ -84,24 +83,14 @@ public class RecursiveAlgorithm extends PathFinder {
             return search(nextPixel);
         }
 
-        if(leanPixels.stream()
-                .filter(pix -> pix.getType().equals(PixelType.END))
-                .findFirst()
-                .orElse(null) != null){
-            // Finish the path
-
-            return true;
-        }
-
 
         //lean = leanPixels.get(0); // Next pixel to explore - First
-        lean = leanPixels.get((int) (Math.random() * leanPixels.size())); // Next pixel to explore - Random selection
-
+        lean = leanPixels.get((int) (Math.random() * (leanPixels.size()))); // Next pixel to explore - Random selection
         leanPixels.remove(lean);
 
         leanPixels.forEach(pix -> {
             pix.setType(PixelType.NEAR);
-            stackNearPixels.push(pix);
+            stackNearPixels.add(pix);
         });
 
         lean.setType(PixelType.HEAD);

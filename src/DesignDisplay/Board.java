@@ -92,13 +92,6 @@ public class Board {
                 .findFirst().orElse(null);
     }
 
-    public void convertHeadToExplored(){
-
-        pixels.stream()
-                .filter(pixel -> pixel.getType() == PixelType.HEAD).findFirst().ifPresent(pixelToConvert -> pixelToConvert.setType(PixelType.EXPLORED));
-    }
-
-
 
     public void clearAll() throws InterruptedException {
         pixels.stream()

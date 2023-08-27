@@ -5,21 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8fac547-b7cc-4d77-8477-d2e38f549ff2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/Algorithms/PathAlgorithms/RecursiveAlgorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/Algorithms/PathAlgorithms/RecursiveAlgorithm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/DesignDisplay/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/DesignDisplay/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/DesignDisplay/Pixel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/DesignDisplay/Pixel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/Algorithms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/Algorithms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/MazeAlgorithms/RandomizedKruskalAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/MazeAlgorithms/RandomizedKruskalAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/MazeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/MazeGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/PathAlgorithms/RecursiveAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/PathAlgorithms/RecursiveAlgorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/PathFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/PathFinder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DesignDisplay/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DesignDisplay/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DesignDisplay/Pixel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DesignDisplay/Pixel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +107,8 @@
       <workItem from="1692610173460" duration="36000" />
       <workItem from="1693041085190" duration="1150000" />
       <workItem from="1693043243372" duration="3001000" />
-      <workItem from="1693063307102" duration="2286000" />
+      <workItem from="1693063307102" duration="2731000" />
+      <workItem from="1693092568546" duration="2215000" />
     </task>
     <servers />
   </component>

@@ -11,7 +11,7 @@ public abstract class PathFinder implements Algorithms{
     private final Board board;
     private final Panel panel;
 
-    private final int DELAY_ANIMATION = 25;
+    private final int DELAY_ANIMATION = 20;
     private final int DELAY_SAFE_STOP = 50;
 
     public PathFinder(Board board, Panel panel) {

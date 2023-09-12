@@ -7,6 +7,7 @@ public enum PixelType{
     WALL,
     NEAR,
     EXPLORED,
-    HEAD
+    HEAD,
+    PATH
 }
 

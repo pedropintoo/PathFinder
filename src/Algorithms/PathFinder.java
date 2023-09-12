@@ -2,6 +2,7 @@ package src.Algorithms;
 
 import src.DesignDisplay.Board;
 import src.DesignDisplay.Pixel;
+import src.DesignDisplay.PixelType;
 import src.Display.Panel;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public abstract class PathFinder implements Algorithms{
     private final Board board;
     private final Panel panel;
 
-    private final int DELAY_ANIMATION = 150;
+    private final int DELAY_ANIMATION = 15;
     private final int DELAY_SAFE_STOP = 50;
 
 
@@ -51,7 +52,7 @@ public abstract class PathFinder implements Algorithms{
 
                 if(execute()){
                     System.out.println("Maze was completed!");
-                    getPathPixels().forEach(System.out::println);
+                    getPathPixels().forEach(pixel -> pixel.setType(PixelType.PATH));
                     //solution();
                 }else{
                     System.out.println("Maze is impossible!");

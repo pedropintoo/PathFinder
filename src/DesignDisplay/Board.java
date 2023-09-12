@@ -122,7 +122,7 @@ public class Board {
 
     public void clearPath() throws InterruptedException {
         pixels.stream()
-                .filter(pixel -> pixel.getType() == PixelType.NEAR || pixel.getType() == PixelType.EXPLORED || pixel.getType() == PixelType.HEAD)
+                .filter(pixel -> pixel.getType() == PixelType.NEAR || pixel.getType() == PixelType.EXPLORED || pixel.getType() == PixelType.HEAD || pixel.getType() == PixelType.PATH)
                 .forEach(pixel -> pixel.setType(PixelType.AIR));
     }
 

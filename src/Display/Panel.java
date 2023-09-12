@@ -62,6 +62,7 @@ public class Panel extends JPanel implements ActionListener, MouseListener, Mous
                         case NEAR -> g2D.setColor(Color.GRAY);
                         case EXPLORED -> g2D.setColor(Color.YELLOW);
                         case HEAD -> g2D.setColor(Color.PINK);
+                        case PATH -> g2D.setColor(Color.PINK);
                     }
                     // Calculate the coordinates of the top-left corner of the square to be drawn
                     // Draw the square

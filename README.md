@@ -10,4 +10,5 @@ Self-taught pathfinding project using various algorithms. Code implemented in Ja
     
 ### | Demonstration
 
-[PathFinder.webm](https://github.com/GH-Pedro/PathFinder/assets/120741472/f6814e59-60f8-4573-afba-8410c590eac2)
+[PathFinder.webm](https://github.com/GH-Pedro/PathFinder/assets/120741472/9a0e73d7-970a-4515-8af1-7d3af48f9f30)
+

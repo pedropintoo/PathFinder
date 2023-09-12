@@ -15,7 +15,12 @@ public class RecursiveAlgorithm extends PathFinder {
     private final Board board;
     private final int COLS;
     private final int ROWS;
-    Stack<Pixel> stackNearPixels;
+    private Stack<Pixel> stackNearPixels;
+
+    private Stack<Pixel> pathPixels;
+
+    private HashSet<Pixel> alternativePixels;
+
 
     public RecursiveAlgorithm(Board board, Panel panel) {
         super(board, panel);
@@ -27,6 +32,8 @@ public class RecursiveAlgorithm extends PathFinder {
         this.ROWS = board.getROWS();
 
         this.stackNearPixels = new Stack<>();
+        this.pathPixels = new Stack<>();
+        this.alternativePixels = new HashSet<>();
     }
 
     @Override
@@ -37,65 +44,65 @@ public class RecursiveAlgorithm extends PathFinder {
 
     }
 
+    @Override
+    public Stack<Pixel> getPathPixels() {
+        return pathPixels;
+    }
+
     public boolean search(Pixel pixel) throws InterruptedException {
-        if(super.isShutdown()) return true; // end the search
+        if(super.isShutdown()) return false; // end the search
 
         Thread.sleep(DELAY_ANIMATION);
 
         if(pixel.getType() == PixelType.HEAD) pixel.setType(PixelType.EXPLORED);
 
-        ArrayList<Pixel> leanPixels = new ArrayList<>();
-        Pixel lean;
+        ArrayList<Pixel> toExplorePixels = new ArrayList<>();
+        ArrayList<Pixel> leanPixels = board.getLeanPixels(pixel);
 
-        lean = board.getPixel(pixel.getX(), pixel.getY()-1); // up
-        if(lean != null){
-            if(lean.getType() == PixelType.AIR) leanPixels.add(lean);
-
-            if(lean.getType() == PixelType.END) return true; // Finish the path
+        // filter
+        for (Pixel pix : leanPixels){
+            if (pix.getType() == PixelType.END) {
+                pathPixels.add(pixel);
+                return true;
+            }
+            if(pix.getType() == PixelType.AIR) toExplorePixels.add(pix);
         }
 
-        lean = board.getPixel(pixel.getX()+1, pixel.getY()); // right
-        if(lean != null){
-            if(lean.getType() == PixelType.AIR) leanPixels.add(lean);
+        Pixel nextPixel;
 
-            if(lean.getType() == PixelType.END) return true; // Finish the path
-        }
+        if(toExplorePixels.size() == 0){
+            // clear the alternativePixels on pathPixels
 
-        lean = board.getPixel(pixel.getX(), pixel.getY()+1); // down
-        if(lean != null){
-            if(lean.getType() == PixelType.AIR) leanPixels.add(lean);
-
-            if(lean.getType() == PixelType.END) return true; // Finish the path
-        }
-
-        lean = board.getPixel(pixel.getX()-1, pixel.getY()); // left
-        if(lean != null){
-            if(lean.getType() == PixelType.AIR) leanPixels.add(lean);
-
-            if(lean.getType() == PixelType.END) return true; // Finish the path
-        }
-
-        if(leanPixels.size() == 0){
-            if(stackNearPixels.size() == 0) return false;
-            Pixel nextPixel = stackNearPixels.pop();
+            if(stackNearPixels.size() == 0) {
+                return false;
+            }
+            nextPixel = stackNearPixels.pop();
             nextPixel.setType(PixelType.HEAD);
 
+            pathPixels.remove(pixel);
             return search(nextPixel);
         }
 
+        //nextPixel = toExplorePixels.get(0); // Next pixel to explore - First
+        nextPixel = toExplorePixels.get((int) (Math.random() * (toExplorePixels.size()))); // Next pixel to explore - Random selection
+        toExplorePixels.remove(nextPixel);
 
-        //lean = leanPixels.get(0); // Next pixel to explore - First
-        lean = leanPixels.get((int) (Math.random() * (leanPixels.size()))); // Next pixel to explore - Random selection
-        leanPixels.remove(lean);
 
-        leanPixels.forEach(pix -> {
+
+        toExplorePixels.forEach(pix -> {
             pix.setType(PixelType.NEAR);
             stackNearPixels.add(pix);
         });
 
-        lean.setType(PixelType.HEAD);
+        nextPixel.setType(PixelType.HEAD);
 
-        return search(lean);
+        if(!search(nextPixel)){
+            pathPixels.remove(pixel);
+            return false;
+        }else {
+            pathPixels.add(pixel);
+            return true;
+        }
 
     }
 

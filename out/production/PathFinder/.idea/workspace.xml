@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e8fac547-b7cc-4d77-8477-d2e38f549ff2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/Algorithms/PathAlgorithms/RecursiveAlgorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/Algorithms/PathAlgorithms/RecursiveAlgorithm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PathFinder/src/Algorithms/PathFinder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PathFinder/src/Algorithms/PathFinder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/PathAlgorithms/RecursiveAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/PathAlgorithms/RecursiveAlgorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/PathFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/PathFinder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +110,11 @@
       <workItem from="1693041085190" duration="1150000" />
       <workItem from="1693043243372" duration="3001000" />
       <workItem from="1693063307102" duration="2731000" />
+      <workItem from="1693092568546" duration="7782000" />
+      <workItem from="1693923798326" duration="348000" />
+      <workItem from="1694253029373" duration="12000" />
+      <workItem from="1694445267085" duration="3332000" />
+      <workItem from="1694507106303" duration="1216000" />
     </task>
     <servers />
   </component>

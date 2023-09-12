@@ -4,7 +4,9 @@ package src.DesignDisplay;
 import src.Algorithms.MazeGenerator;
 import src.Algorithms.PathFinder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 
 public class Board {
@@ -90,6 +92,25 @@ public class Board {
         return pixels.stream()
                 .filter(pixel -> Arrays.equals(pixel.getCoords(), new int[]{x, y}))
                 .findFirst().orElse(null);
+    }
+
+    public ArrayList<Pixel> getLeanPixels(Pixel pixel){
+        ArrayList<Pixel> leanPixels = new ArrayList<>();
+
+        leanPixels.add(this.getPixel(pixel.getX(), pixel.getY()-1)); // up
+        leanPixels.add(this.getPixel(pixel.getX()+1, pixel.getY())); // right
+        leanPixels.add(this.getPixel(pixel.getX(), pixel.getY()+1)); // down
+        leanPixels.add(this.getPixel(pixel.getX()-1, pixel.getY())); // left
+
+        leanPixels.removeAll(Collections.singleton(null));
+
+        return leanPixels;
+    }
+
+    public ArrayList<Pixel> getExploredPixels(){
+        return new ArrayList<>(pixels.stream()
+                .filter(pixel -> pixel.getType() == PixelType.EXPLORED)
+                .toList());
     }
 
 

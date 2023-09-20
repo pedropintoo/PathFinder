@@ -1,5 +1,5 @@
 # PathFinder
-Self-taught pathfinding project using various algorithms. Code implemented in Java.
+Starter pack para AED
 
 ### | Algorithms already implemented
 
